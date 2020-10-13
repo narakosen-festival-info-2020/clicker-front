@@ -2,14 +2,17 @@
   <div class="container">
     <div>
       <label>
-        <h2> You have ...</h2>
-        <h1>{{ answer }}</h1>
+        <h2>You have ...</h2>
+        <h1>{{ displayCount }}</h1>
+        <h2>Shika Sembei(es)!</h2>
       </label>
       <input type="button" value="クリック" @click="click">
-      <input type="button" value="施設" @click="buyFactory">
-      <p>
-        施設: {{ factory }}
-      </p>
+      <input type="button" value="+100" @click="buy(-100)">
+      <input type="button" value="-100" @click="buy(100)">
+      <input type="button" value="+1e9" @click="buy(-1e9)">
+      <input type="button" value="-1e9" @click="buy(1e9)">
+      <input type="button" value="+1e18" @click="buy(-1e18)">
+      <input type="button" value="-1e18" @click="buy(1e18)">
     </div>
   </div>
 </template>
@@ -23,20 +26,21 @@ export default {
     return {
       socket: new W3cwebsocket('ws://localhost:8000/ws'),
       message: '',
-      answer: '',
+      answer: {
+        count: 0
+      },
+      count: 0.0, // 内部的な値、実数
+      representCount: 0.0, // 表示しうる値、実数
+      displayCount: 0, // 実際に表示する値、整数or文字列
       clickCountBuffer: 0,
-      count: 0,
       factory: 0
     }
   },
   created () {
     const self = this
     self.socket.onmessage = function (e) {
-      const counter = JSON.parse(e.data).count
-      self.answer = counter
+      self.answer = JSON.parse(e.data)
     }
-  },
-  mounted () {
     // 20ミリ秒ごとにクリックがあれば送信する
     setInterval(function (self) {
       if (self.clickCountBuffer) {
@@ -46,16 +50,28 @@ export default {
         self.clickCountBuffer = 0
       }
     }, 20, this)
+    this.gameAnimation()
+  },
+  mounted () {
   },
   methods: {
     click () {
       this.clickCountBuffer++
     },
-    buyFactory () {
-      this.factory += 1
+    buy (cost) {
       this.socket.send(JSON.stringify({
-        count: -100
+        count: -cost
       }))
+    },
+    gameAnimation () {
+      this.count = this.answer.count
+      this.representCount = this.representCount * 0.9 + this.count * 0.1 + 1e-2
+      if (this.representCount <= 1e9) {
+        this.displayCount = Math.floor(this.representCount)
+      } else {
+        this.displayCount = this.representCount.toExponential(3)
+      }
+      requestAnimationFrame(this.gameAnimation)
     }
   }
 }
