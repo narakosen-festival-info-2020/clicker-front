@@ -24,7 +24,7 @@ const W3cwebsocket = w3cwebsocket
 export default {
   data () {
     return {
-      socket: new W3cwebsocket('ws://localhost:8000/ws'),
+      socket: new W3cwebsocket('ws://localhost:80/clicker'),
       message: '',
       answer: {
         count: 0
