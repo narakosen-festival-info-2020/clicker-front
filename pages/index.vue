@@ -1,37 +1,68 @@
 <template>
   <div class="container">
     <div>
-      <Logo />
-      <h1 class="title">
-        clicker-front
-      </h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+      <label>
+        <h2> You have ...</h2>
+        <h1>{{ answer }}</h1>
+      </label>
+      <input type="button" value="クリック" @click="click">
+      <input type="button" value="施設" @click="buyFactory">
+      <p>
+        施設: {{ factory }}
+      </p>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+import { w3cwebsocket } from 'websocket'
+const W3cwebsocket = w3cwebsocket
+
+export default {
+  data () {
+    return {
+      socket: new W3cwebsocket('ws://localhost:8000/ws'),
+      message: '',
+      answer: '',
+      clickCountBuffer: 0,
+      count: 0,
+      factory: 0
+    }
+  },
+  created () {
+    const self = this
+    self.socket.onmessage = function (e) {
+      const counter = JSON.parse(e.data).count
+      self.answer = counter
+    }
+  },
+  mounted () {
+    // 20ミリ秒ごとにクリックがあれば送信する
+    setInterval(function (self) {
+      if (self.clickCountBuffer) {
+        self.socket.send(JSON.stringify({
+          count: self.clickCountBuffer
+        }))
+        self.clickCountBuffer = 0
+      }
+    }, 20, this)
+  },
+  methods: {
+    click () {
+      this.clickCountBuffer++
+    },
+    buyFactory () {
+      this.factory += 1
+      this.socket.send(JSON.stringify({
+        count: -100
+      }))
+    }
+  }
+}
 </script>
 
 <style>
+
 .container {
   margin: 0 auto;
   min-height: 100vh;
@@ -41,33 +72,4 @@ export default {}
   text-align: center;
 }
 
-.title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
 </style>
