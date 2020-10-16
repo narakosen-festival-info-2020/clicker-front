@@ -1,21 +1,20 @@
 <template>
   <div class="main">
-    <h2>You have ...</h2>
-    <h1>{{ displayCount }}</h1>
-    <h2>Shika Sembei(es)!</h2>
-    <input type="button" value="クリック" @click="click">
-    <input type="button" value="+100" @click="buy(-100)">
-    <input type="button" value="-100" @click="buy(100)">
-    <input type="button" value="+1e9" @click="buy(-1e9)">
-    <input type="button" value="-1e9" @click="buy(1e9)">
-    <input type="button" value="+1e18" @click="buy(-1e18)">
-    <input type="button" value="-1e18" @click="buy(1e18)">
+    <Header>
+      <h1>{{ displayCount }}</h1>
+    </Header>
+    <Click @clickCount="click" @buy="buy" />
+    <Menubar />
   </div>
 </template>
 
 <script>
+import Menubar from '@/components/Menubar'
+import Header from '@/components/Header'
+import Click from '@/components/game/Click'
 export default {
   name: 'Main',
+  components: { Header, Menubar, Click },
   data () {
     return {
       socket: new WebSocket('ws://localhost:80/clicker'),
@@ -28,7 +27,8 @@ export default {
       displayCount: 'Waiting server...', // 実際に表示する値、整数or文字列
       clickCountBuffer: 0,
       factory: 0,
-      globalFrame: 0
+      globalFrame: 0,
+      connectionError: false
     }
   },
   created () {
@@ -44,6 +44,7 @@ export default {
     }
     self.socket.onerror = () => {
       self.displayCount = 'Connection Error'
+      self.connectionError = true
     }
   },
   mounted () {
@@ -79,5 +80,11 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+.main{
+  // width: 100%;
+  height: 100vh;
+  display: block;
+  text-align: center;
+}
 </style>
