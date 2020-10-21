@@ -1,6 +1,6 @@
 <template>
   <div class="building">
-    <div v-for="building in buildings" :key="building.name" class="buildingDisplay">
+    <div v-for="building in buildings" :key="building.name" class="buildingDisplay" @click.prevent="buy(0)">
       <h2>{{ building.name }}</h2>
       <p>{{ building.description }}</p>
       <h3>{{ building.amount }}台</h3>

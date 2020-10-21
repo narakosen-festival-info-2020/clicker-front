@@ -38,9 +38,18 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios'
   ],
-
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
+    proxy: true
+  },
+  proxy: {
+    '/api': {
+      // target: 'http://localhost:80',
+      target: 'http://clicker-back-lb-465582205.ap-northeast-1.elb.amazonaws.com/',
+      pathRewrite: {
+        '^/api': '/'
+      }
+    }
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)

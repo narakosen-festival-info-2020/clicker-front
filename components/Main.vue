@@ -15,16 +15,19 @@ import Click from '@/components/game/Click'
 import Building from '@/components/game/Building'
 import Statement from '@/components/game/Statement'
 import Achievement from '@/components/game/Achievement'
+
 export default {
   name: 'Main',
   components: { Achievement, Statement, Building, Header, Menubar, Click },
   data () {
     return {
-      socket: new WebSocket('ws://localhost:80/clicker'),
+      socket: new WebSocket('ws://clicker-back-lb-465582205.ap-northeast-1.elb.amazonaws.com:80/clicker'),
+      // socket: new WebSocket('ws://localhost:80/clicker'),
       message: '',
       answer: {
         count: 0
       },
+      ip: null,
       gameComponents: [
         'Click', 'Building', 'Statement', 'Achievement'
       ],
@@ -67,10 +70,12 @@ export default {
     click () {
       this.clickCountBuffer++
     },
-    buy (cost) {
-      this.socket.send(JSON.stringify({
-        count: -cost
-      }))
+    async buy () {
+      this.ip = await this.$axios.$post('/api/facility/temp')
+        .catch((error) => {
+          alert('購入できませんでした')
+          alert(error)
+        })
     },
     gameAnimation () {
       // 描画ごとにクリックがあれば送信する
