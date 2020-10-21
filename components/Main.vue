@@ -3,7 +3,7 @@
     <Header>
       <h1>{{ displayCount }}</h1>
     </Header>
-    <div :is="gameComponent" @click="click" @buy="buy" />
+    <div :is="gameComponent" class="game" @click="click" @buy="buy" />
     <Menubar @gameSelect="gameSelect" />
   </div>
 </template>
@@ -104,4 +104,9 @@ export default {
   display: block;
   text-align: center;
 }
+
+.game{
+  height: 75vh;
+}
+
 </style>

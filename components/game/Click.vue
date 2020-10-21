@@ -18,9 +18,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.click{
-  height: 80vh;
-}
 .centering{
   position: relative;
   top: 40%;
