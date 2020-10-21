@@ -1,16 +1,16 @@
 <template>
   <div class="menu-bar">
     <div class="menu-container">
-      <div class="menu-item">
+      <div class="menu-item" @click="gameSelect(0)">
         <span> クリック </span>
       </div>
-      <div class="menu-item">
+      <div class="menu-item" @click="gameSelect(1)">
         <span> 施設 </span>
       </div>
-      <div class="menu-item">
+      <div class="menu-item" @click="gameSelect(2)">
         <span> 状態 </span>
       </div>
-      <div class="menu-item">
+      <div class="menu-item" @click="gameSelect(3)">
         <span> 実績 </span>
       </div>
     </div>
@@ -19,7 +19,12 @@
 
 <script>
 export default {
-  name: 'Menubar'
+  name: 'Menubar',
+  methods: {
+    gameSelect (id) {
+      this.$emit('gameSelect', id)
+    }
+  }
 }
 </script>
 

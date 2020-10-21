@@ -3,8 +3,8 @@
     <Header>
       <h1>{{ displayCount }}</h1>
     </Header>
-    <Click @clickCount="click" @buy="buy" />
-    <Menubar />
+    <div :is="gameComponent" @click="click" @buy="buy" />
+    <Menubar @gameSelect="gameSelect" />
   </div>
 </template>
 
@@ -12,9 +12,12 @@
 import Menubar from '@/components/Menubar'
 import Header from '@/components/Header'
 import Click from '@/components/game/Click'
+import Building from '@/components/game/Building'
+import Statement from '@/components/game/Statement'
+import Achievement from '@/components/game/Achievement'
 export default {
   name: 'Main',
-  components: { Header, Menubar, Click },
+  components: { Achievement, Statement, Building, Header, Menubar, Click },
   data () {
     return {
       socket: new WebSocket('ws://localhost:80/clicker'),
@@ -22,6 +25,10 @@ export default {
       answer: {
         count: 0
       },
+      gameComponents: [
+        'Click', 'Building', 'Statement', 'Achievement'
+      ],
+      currentGameComponentIndex: 0,
       count: 0.0, // 内部的な値、実数
       representCount: 0.0, // 表示しうる値、実数
       displayCount: 'Waiting server...', // 実際に表示する値、整数or文字列
@@ -29,6 +36,11 @@ export default {
       factory: 0,
       globalFrame: 0,
       connectionError: false
+    }
+  },
+  computed: {
+    gameComponent () {
+      return this.gameComponents[this.currentGameComponentIndex]
     }
   },
   created () {
@@ -46,8 +58,10 @@ export default {
       self.displayCount = 'Connection Error'
       self.connectionError = true
     }
-  },
-  mounted () {
+    self.socket.onclose = () => {
+      self.displayCount = 'Connection Had Closed'
+      self.connectionError = true
+    }
   },
   methods: {
     click () {
@@ -75,6 +89,9 @@ export default {
       }
       this.globalFrame++
       requestAnimationFrame(this.gameAnimation)
+    },
+    gameSelect (id) {
+      this.currentGameComponentIndex = id
     }
   }
 }

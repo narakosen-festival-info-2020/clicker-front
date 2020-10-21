@@ -1,8 +1,7 @@
 <template>
   <div class="header">
-    <h2>You have ...</h2>
     <slot />
-    <h2>Shika Sembei(es)!</h2>
+    <h2>Shika Sembei(s)!</h2>
   </div>
 </template>
 
@@ -14,7 +13,7 @@ export default {
 
 <style lang="scss">
 .header{
-  height: 10vh;
+  height: 14vh;
 }
 
 </style>

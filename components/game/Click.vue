@@ -11,10 +11,7 @@ export default {
   name: 'Click',
   methods: {
     click () {
-      this.$emit('clickCount')
-    },
-    buy (cost) {
-      this.$emit('buy', cost)
+      this.$emit('click')
     }
   }
 }
