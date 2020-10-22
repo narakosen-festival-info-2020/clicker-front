@@ -31,7 +31,7 @@ export default {
       representCount: 0.0, // 表示しうる値、実数
       displayCount: 'Waiting server...', // 実際に表示する値、整数or文字列
       clickCountBuffer: 0,
-      factory: 0,
+      buildings: [],
       globalFrame: 0,
       connectionError: false
     }

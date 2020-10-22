@@ -1,31 +1,25 @@
 <template>
   <div class="building">
-    <div v-for="building in buildings" :key="building.name" class="buildingDisplay" @click.prevent="buy(0)">
+    <div v-for="building in $parent.buildings" :key="building.name" class="buildingDisplay" @click.prevent="buy(building.name)">
       <div class="name">
         <span class="b-text">{{ building.name }}</span>
       </div>
       <div class="description">
-        <span class="b-text">{{ building.description }}</span>
+        <span class="b-text">価格{{ building.amount }}：生産量：{{ building.num_gen }}</span>
       </div>
       <div class="amount">
-        <span class="b-text-center">{{ building.amount }}台</span>
+        <span class="b-text-center">{{ building.num_hold }}台</span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import buildingsData from '@/assets/json/building.json'
 export default {
   name: 'Building',
-  data () {
-    return {
-      buildings: buildingsData
-    }
-  },
   methods: {
-    buy (cost) {
-      this.$emit('buy', cost)
+    buy (component) {
+      this.$emit('buy', component)
     }
   }
 }
