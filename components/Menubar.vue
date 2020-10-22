@@ -1,18 +1,9 @@
 <template>
   <div class="menu-bar">
-    <div class="menu-container">
-      <div class="menu-item" @click="gameSelect(0)">
-        <span> クリック </span>
-      </div>
-      <div class="menu-item" @click="gameSelect(1)">
-        <span> 施設 </span>
-      </div>
-      <div class="menu-item" @click="gameSelect(2)">
-        <span> 状態 </span>
-      </div>
-      <div class="menu-item" @click="gameSelect(3)">
-        <span> 実績 </span>
-      </div>
+    <div v-for="(menu, i) in gameMenu" :key="menu" class="menu-item" @click="gameSelect(i)">
+      <span>
+        {{ menu }}
+      </span>
     </div>
   </div>
 </template>
@@ -20,9 +11,22 @@
 <script>
 export default {
   name: 'Menubar',
+  data () {
+    return {
+      gameMenu: [
+        'クリック', '施設', '状態', '実績'
+      ],
+      gameComponents: [
+        'Click', 'Building', 'Statement', 'Achievement'
+      ]
+    }
+  },
+  mounted () {
+    this.gameSelect(0)
+  },
   methods: {
     gameSelect (id) {
-      this.$emit('gameSelect', id)
+      this.$parent.gameComponent = this.gameComponents[id]
     }
   }
 }
@@ -31,9 +35,8 @@ export default {
 <style lang="scss" scoped>
 .menu-bar{
   display: block;
-  height: 10vh;
+  height: min(10vh, 80px);
   width: 100%;
-  max-height: 80px;
   position: absolute;
   bottom: 0;
   background: #999383;
@@ -48,20 +51,14 @@ export default {
   }
 }
 
-.menu-container{
-  height: 100%;
-  max-width: 600px;
-  width: 100%;
-  margin: auto;
-
-  & .menu-item{
+.menu-item{
+  display: inline-block;
   width: 25%;
+  max-width: 200px;
   height: 100%;
-  float: left;
-    &:hover{
-      cursor: pointer;
-      background: #837d68;
-    }
+  &:hover{
+    cursor: pointer;
+    background: #837d68;
   }
 }
 

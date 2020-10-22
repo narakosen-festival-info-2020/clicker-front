@@ -4,7 +4,7 @@
       {{ displayCount }}
     </Header>
     <div :is="gameComponent" class="game" @click="click" @buy="buy" />
-    <Menubar @gameSelect="gameSelect" />
+    <Menubar />
   </div>
 </template>
 
@@ -23,10 +23,7 @@ export default {
       answer: {
         count: 0
       },
-      gameComponents: [
-        'Click', 'Building', 'Statement', 'Achievement'
-      ],
-      currentGameComponentIndex: 0,
+      gameComponent: '', // components
       count: 0.0, // 内部的な値、実数
       representCount: 0.0, // 表示しうる値、実数
       displayCount: 'Waiting server...', // 実際に表示する値、整数or文字列
@@ -34,11 +31,6 @@ export default {
       factory: 0,
       globalFrame: 0,
       connectionError: false
-    }
-  },
-  computed: {
-    gameComponent () {
-      return this.gameComponents[this.currentGameComponentIndex]
     }
   },
   created () {
@@ -87,9 +79,6 @@ export default {
       }
       this.globalFrame++
       requestAnimationFrame(this.gameAnimation)
-    },
-    gameSelect (id) {
-      this.currentGameComponentIndex = id
     }
   }
 }
