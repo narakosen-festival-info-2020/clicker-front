@@ -12,12 +12,18 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    ],
+    bodyAttrs: {
+      class: 'body-class'
+    }
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
   ],
+  styleResources: {
+    scss: ['~/assets/css/global.scss']
+  },
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
@@ -35,7 +41,8 @@ export default {
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/style-resources'
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)

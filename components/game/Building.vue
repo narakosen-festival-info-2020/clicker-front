@@ -55,18 +55,18 @@ export default {
 }
 </script>
 
-<style lang="scss">
-
+<style lang="scss" scoped>
 .building{
   overflow-y: scroll;
 }
 
 .buildingDisplay{
+  cursor: pointer;
   float: right;
   margin-top: 12px;
-  cursor: pointer;
   width: 70vw;
   height: 120px;
   background: #ddddce;
 }
+
 </style>

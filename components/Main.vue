@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <Header>
-      <h1>{{ displayCount }}</h1>
+      {{ displayCount }}
     </Header>
     <div :is="gameComponent" class="game" @click="click" @buy="buy" />
     <Menubar @gameSelect="gameSelect" />
@@ -9,15 +9,13 @@
 </template>
 
 <script>
-import Menubar from '@/components/Menubar'
-import Header from '@/components/Header'
 import Click from '@/components/game/Click'
 import Building from '@/components/game/Building'
 import Statement from '@/components/game/Statement'
 import Achievement from '@/components/game/Achievement'
 export default {
   name: 'Main',
-  components: { Achievement, Statement, Building, Header, Menubar, Click },
+  components: { Achievement, Statement, Building, Click },
   data () {
     return {
       socket: new WebSocket('ws://localhost:80/clicker'),
@@ -97,10 +95,8 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .main{
-  // width: 100%;
-  height: 100vh;
   display: block;
   text-align: center;
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <slot />
+    <h1><slot /></h1>
     <h2>Shika Sembei(s)!</h2>
   </div>
 </template>
@@ -11,9 +11,10 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .header{
-  height: 14vh;
+  overflow: hidden;
+  height: 15vh;
 }
 
 </style>

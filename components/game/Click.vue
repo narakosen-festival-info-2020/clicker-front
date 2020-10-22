@@ -17,7 +17,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .centering{
   position: relative;
   top: 40%;
@@ -33,6 +33,5 @@ export default {
   top: -144px;
   left: -144px;
   position: absolute;
-  font-size: 144px;
 }
 </style>

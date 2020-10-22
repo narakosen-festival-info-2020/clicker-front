@@ -28,41 +28,41 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .menu-bar{
   display: block;
-  height: 10%;
+  height: 10vh;
   width: 100%;
   max-height: 80px;
   position: absolute;
   bottom: 0;
   background: #999383;
-  font-size: 18px;
-}
-@media screen and (max-width: 600px) {
-  .menu-bar{
+  font-size: 14px;
+
+  @include tab {
     font-size: 16px;
   }
-}
-@media screen and (max-width: 992px) {
-  .menu-bar{
-    font-size: 14px;
+
+  @include sp {
+    font-size: 18px;
   }
 }
+
 .menu-container{
   height: 100%;
   max-width: 600px;
   width: 100%;
   margin: auto;
-}
-.menu-item{
+
+  & .menu-item{
   width: 25%;
-  // height: 50px;
   height: 100%;
   float: left;
+    &:hover{
+      cursor: pointer;
+      background: #837d68;
+    }
+  }
 }
-.menu-item:hover{
-  cursor: pointer;
-  background: #837d68;
-}
+
 </style>
