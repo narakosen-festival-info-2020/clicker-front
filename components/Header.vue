@@ -15,6 +15,7 @@ export default {
 .header{
   overflow: hidden;
   height: 15vh;
+  text-align: center;
 }
 
 </style>

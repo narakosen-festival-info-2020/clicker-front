@@ -40,6 +40,7 @@ export default {
   position: absolute;
   bottom: 0;
   background: #999383;
+  text-align: center;
   font-size: 14px;
 
   @include tab {

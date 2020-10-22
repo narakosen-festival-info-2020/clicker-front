@@ -28,10 +28,8 @@ export default {
   text-align: center;
 }
 .big-click{
+  @include center;
   height: 288px;
   width: 288px;
-  top: -144px;
-  left: -144px;
-  position: absolute;
 }
 </style>

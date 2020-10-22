@@ -1,50 +1,26 @@
 <template>
   <div class="building">
     <div v-for="building in buildings" :key="building.name" class="buildingDisplay">
-      <h2>{{ building.name }}</h2>
-      <p>{{ building.description }}</p>
-      <h3>{{ building.amount }}台</h3>
+      <div class="name">
+        <span class="b-text">{{ building.name }}</span>
+      </div>
+      <div class="description">
+        <span class="b-text">{{ building.description }}</span>
+      </div>
+      <div class="amount">
+        <span class="b-text-center">{{ building.amount }}台</span>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import buildingsData from '@/assets/json/building.json'
 export default {
   name: 'Building',
   data () {
     return {
-      buildings: [
-        {
-          name: '学生',
-          description: '皆さんの代わりに高専の学生が5秒に一度クリックしてくれます',
-          amount: 113
-        },
-        {
-          name: '3Dプリンター',
-          description: '3Dプリンターを用いて生産します',
-          amount: 90
-        },
-        {
-          name: 'せんべい精錬',
-          description: '溶かした材料を精錬して生産します',
-          amount: 73
-        },
-        {
-          name: '避雷針',
-          description: '雷の電気エネルギーを利用してせんべいを錬成します',
-          amount: 36
-        },
-        {
-          name: 'ルーター',
-          description: 'インターネットからパケットせんべいを取り寄せます',
-          amount: 17
-        },
-        {
-          name: 'コンパイラー',
-          description: 'ソースコードをコンパイルして実行可能なせんべいを生成します',
-          amount: 17
-        }
-      ]
+      buildings: buildingsData
     }
   },
   methods: {
@@ -57,16 +33,48 @@ export default {
 
 <style lang="scss" scoped>
 .building{
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .buildingDisplay{
   cursor: pointer;
-  float: right;
-  margin-top: 12px;
-  width: 70vw;
-  height: 120px;
+  overflow: hidden;
+  margin: 12px auto;
   background: #ddddce;
+  width: 70%;
+  height: 100px;
+  display: grid;
+  grid-template-rows: 50% 50%;
+  grid-template-columns: 80% 1fr;
+  & .name {
+    position: relative;
+    border: 1px solid black;
+    grid-row: 1 / 2;
+    grid-column: 1 / 2;
+  }
+  & .description {
+    position: relative;
+    border: 1px solid black;
+    grid-row: 2 / 3;
+    grid-column: 1 / 2;
+  }
+  & .amount {
+    position: relative;
+    border: 1px solid black;
+    grid-row: 1 / 3;
+    grid-column: 2 / 3;
+  }
+
+  & .b-text{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  & .b-text-center{
+    @include center;
+  }
+
 }
 
 </style>

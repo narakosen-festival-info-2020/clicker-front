@@ -87,11 +87,10 @@ export default {
 <style lang="scss" scoped>
 .main{
   display: block;
-  text-align: center;
 }
 
 .game{
-  height: 75vh;
+  height: calc(100vh - 15vh - min(10vh, 80px));
 }
 
 </style>
