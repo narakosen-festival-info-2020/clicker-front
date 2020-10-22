@@ -29,7 +29,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .achievement{
   text-align: center;
 }
