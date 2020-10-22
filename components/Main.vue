@@ -55,15 +55,30 @@ export default {
       self.displayCount = 'Connection Had Closed'
       self.connectionError = true
     }
+    this.loadFacilities()
   },
   methods: {
     click () {
       this.clickCountBuffer++
     },
-    async buy () {
-      this.ip = await this.$axios.$post('/api/facility/temp')
+    async buy (name) {
+      this.ip = await this.$axios.$post(`/api/facility/${name}`)
         .catch((error) => {
           alert('購入できませんでした')
+          alert(error)
+        })
+      await this.loadFacilities()
+    },
+    async loadFacilities () {
+      await this.$axios.$get('/api/facility', {
+        responseType: 'json'
+      })
+        .then((response) => {
+          this.buildings = [...response.facilities]
+          this.buildings.sort((a, b) => a.num_gen - b.num_gen)
+        })
+        .catch((error) => {
+          alert('サーバーエラー')
           alert(error)
         })
     },
