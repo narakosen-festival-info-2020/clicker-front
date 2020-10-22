@@ -31,17 +31,13 @@ export default {
 
 <style lang="scss">
 .achievement{
-  text-align: center;
-}
-.achievement{
   text-align: left;
   width: 100%;
   max-width: 840px;
-  margin: 0 auto;
   overflow-y: scroll;
-  padding: 12px;
 }
 .achievementBox{
+  text-align: center;
   display: inline-block;
   box-sizing: border-box;
   width: 60px;
