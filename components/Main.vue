@@ -1,16 +1,14 @@
 <template>
   <div class="main">
     <Header>
-      <h1>{{ displayCount }}</h1>
+      {{ displayCount }}
     </Header>
     <div :is="gameComponent" class="game" @click="click" @buy="buy" />
-    <Menubar @gameSelect="gameSelect" />
+    <Menubar />
   </div>
 </template>
 
 <script>
-import Menubar from '@/components/Menubar'
-import Header from '@/components/Header'
 import Click from '@/components/game/Click'
 import Building from '@/components/game/Building'
 import Statement from '@/components/game/Statement'
@@ -18,7 +16,7 @@ import Achievement from '@/components/game/Achievement'
 
 export default {
   name: 'Main',
-  components: { Achievement, Statement, Building, Header, Menubar, Click },
+  components: { Achievement, Statement, Building, Click },
   data () {
     return {
       socket: new WebSocket('ws://clicker-back-lb-465582205.ap-northeast-1.elb.amazonaws.com:80/clicker'),
@@ -27,11 +25,7 @@ export default {
       answer: {
         count: 0
       },
-      ip: null,
-      gameComponents: [
-        'Click', 'Building', 'Statement', 'Achievement'
-      ],
-      currentGameComponentIndex: 0,
+      gameComponent: '', // components
       count: 0.0, // 内部的な値、実数
       representCount: 0.0, // 表示しうる値、実数
       displayCount: 'Waiting server...', // 実際に表示する値、整数or文字列
@@ -39,11 +33,6 @@ export default {
       factory: 0,
       globalFrame: 0,
       connectionError: false
-    }
-  },
-  computed: {
-    gameComponent () {
-      return this.gameComponents[this.currentGameComponentIndex]
     }
   },
   created () {
@@ -94,24 +83,18 @@ export default {
       }
       this.globalFrame++
       requestAnimationFrame(this.gameAnimation)
-    },
-    gameSelect (id) {
-      this.currentGameComponentIndex = id
     }
   }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .main{
-  // width: 100%;
-  height: 100vh;
   display: block;
-  text-align: center;
 }
 
 .game{
-  height: 75vh;
+  height: calc(100vh - 15vh - min(10vh, 80px));
 }
 
 </style>
