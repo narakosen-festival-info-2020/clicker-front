@@ -1,8 +1,8 @@
 <template>
   <div class="menu-bar">
-    <div v-for="(menu, i) in gameMenu" :key="menu" class="menu-item" @click="gameSelect(i)">
+    <div v-for="menu in gameMenus" :key="menu.name" class="menu-item" @click="gameSelect(menu.component)">
       <span>
-        {{ menu }}
+        {{ menu.name }}
       </span>
     </div>
   </div>
@@ -13,11 +13,23 @@ export default {
   name: 'Menubar',
   data () {
     return {
-      gameMenu: [
-        'クリック', '施設', '状態', '実績'
-      ],
-      gameComponents: [
-        'Click', 'Building', 'Statement', 'Achievement'
+      gameMenus: [
+        {
+          name: 'クリック',
+          component: 'Click'
+        },
+        {
+          name: '施設',
+          component: 'Building'
+        },
+        {
+          name: '状態',
+          component: 'Statement'
+        },
+        {
+          name: '実績',
+          component: 'Achievement'
+        }
       ]
     }
   },
@@ -25,8 +37,8 @@ export default {
     this.gameSelect(0)
   },
   methods: {
-    gameSelect (id) {
-      this.$parent.gameComponent = this.gameComponents[id]
+    gameSelect (component) {
+      this.$parent.gameComponent = component
     }
   }
 }
