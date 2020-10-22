@@ -13,10 +13,11 @@ import Click from '@/components/game/Click'
 import Building from '@/components/game/Building'
 import Statement from '@/components/game/Statement'
 import Achievement from '@/components/game/Achievement'
+import Menubar from '@/components/Menubar'
 
 export default {
   name: 'Main',
-  components: { Achievement, Statement, Building, Click },
+  components: { Menubar, Achievement, Statement, Building, Click },
   data () {
     return {
       socket: new WebSocket('ws://clicker-back-lb-465582205.ap-northeast-1.elb.amazonaws.com:80/clicker'),
@@ -95,6 +96,9 @@ export default {
 
 .game{
   height: calc(100vh - 15vh - min(10vh, 80px));
+  margin: 0 auto; //TODO:横のセンタリングでバグらせない方法
+  width: 100%;
+  max-width: 840px;
 }
 
 </style>
