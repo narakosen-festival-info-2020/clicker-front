@@ -34,7 +34,7 @@ export default {
     }
   },
   mounted () {
-    this.gameSelect(0)
+    this.gameSelect('Click')
   },
   methods: {
     gameSelect (component) {
