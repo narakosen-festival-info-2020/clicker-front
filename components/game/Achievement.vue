@@ -13,5 +13,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.achievement{
+  text-align: center;
+}
 
 </style>

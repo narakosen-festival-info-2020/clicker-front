@@ -13,5 +13,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.statement{
+  text-align: center;
+}
 
 </style>
