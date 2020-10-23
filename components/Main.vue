@@ -3,7 +3,7 @@
     <Header>
       {{ displayCount }}
     </Header>
-    <div :is="gameComponent" class="game" @click="click" @buy="buy" />
+    <div :is="gameComponent" class="game" @buy="buy" />
     <Menubar />
   </div>
 </template>
@@ -58,14 +58,10 @@ export default {
     this.loadFacilities()
   },
   methods: {
-    click () {
-      this.clickCountBuffer++
-    },
     async buy (name) {
       this.ip = await this.$axios.$post(`/api/facility/${name}`)
         .catch((error) => {
-          alert('購入できませんでした')
-          alert(error)
+          alert(`購入できませんでした${error}`)
         })
       await this.loadFacilities()
     },
@@ -92,11 +88,7 @@ export default {
       }
       this.count = this.answer.count
       this.representCount = this.representCount * 0.9 + this.count * 0.1
-      if (this.representCount <= 1e9) {
-        this.displayCount = Math.round(this.representCount)
-      } else {
-        this.displayCount = this.representCount.toExponential(3)
-      }
+      this.displayCount = this.representTransform(this.representCount)
       this.globalFrame++
       requestAnimationFrame(this.gameAnimation)
     }

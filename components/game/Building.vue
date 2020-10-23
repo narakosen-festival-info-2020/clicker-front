@@ -5,7 +5,7 @@
         <span class="b-text">{{ building.name }}</span>
       </div>
       <div class="description">
-        <span class="b-text">価格{{ building.amount }}：生産量：{{ building.num_gen }}</span>
+        <span class="b-text">価格{{ representTransform(building.amount) }}：生産量：{{ building.num_gen }}</span>
       </div>
       <div class="amount">
         <span class="b-text-center">{{ building.num_hold }}台</span>

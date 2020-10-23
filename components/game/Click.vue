@@ -12,6 +12,7 @@ export default {
   methods: {
     click () {
       this.$parent.clickCountBuffer++
+      this.$parent.clickCountBuffer += 1e11
       // this.$emit('click')
     }
   }

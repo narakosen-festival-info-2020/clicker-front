@@ -27,7 +27,8 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
-    '@/plugins/v-tooltip.js'
+    '@/plugins/v-tooltip.js',
+    '@/plugins/representTransformer.js'
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
