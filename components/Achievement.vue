@@ -1,41 +1,36 @@
 <template>
-  <div class="achievement">
-    <div v-for="achieve in achievements" :key="achieve.id" v-tooltip="!achieve.unlocked?'???':achieve.name + '<br>' + achieve.description" :class="achieve.unlocked?'unlocked':'locked'" class="achievementBox">
-      <p> {{ achieve.id }} </p>
-    </div>
+  <div
+    v-tooltip="!unlocked?'???':name + '<br>' + description"
+    :class="unlocked?'unlocked':'locked'"
+    class="achievementBox"
+  >
+    <p> {{ id }} </p>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Achievement',
-  data () {
-    return {
-      achievements: []
+  props: {
+    id: {
+      type: Number,
+      default: 0
+    },
+    description: {
+      type: String,
+      default: '実績'
     }
   },
-  created () {
-    for (let i = 0; i < 500; i++) {
-      this.achievements.push({
-        id: i,
-        name: `実績${i}`,
-        // ダミー説明文
-        description: `実績${i}は実績による実績のための実績です。実績である。実績である。実績である。実績である。実績である。実績である。実績である。実績である。実績。`,
-        // unlocked: false
-        unlocked: i % 5 === 0
-      })
+  data () {
+    return {
+      name: `実績${this.id}`,
+      // unlocked: false
+      unlocked: this.id % 5 === 0
     }
   }
 }
 </script>
 
 <style lang="scss">
-.achievement{
-  text-align: left;
-  width: 100%;
-  max-width: 840px;
-  overflow-y: scroll;
-}
 .achievementBox{
   text-align: center;
   display: inline-block;
