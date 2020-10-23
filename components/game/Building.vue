@@ -18,8 +18,8 @@
 export default {
   name: 'Building',
   methods: {
-    buy (component) {
-      this.$emit('buy', component)
+    buy (name) {
+      this.$emit('buy', name)
     }
   }
 }
