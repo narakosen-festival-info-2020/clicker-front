@@ -11,8 +11,7 @@ export default {
   name: 'Click',
   methods: {
     click () {
-      this.$parent.clickCountBuffer++
-      this.$parent.clickCountBuffer += 1e11
+      this.$parent.clickCountBuffer += 1
       // this.$emit('click')
     }
   }
