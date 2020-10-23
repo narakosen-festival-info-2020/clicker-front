@@ -20,8 +20,6 @@ export default {
   components: { Menubar, Achievement, Statement, Building, Click },
   data () {
     return {
-      socket: new WebSocket('ws://clicker-back-lb-465582205.ap-northeast-1.elb.amazonaws.com:80/clicker'),
-      // socket: new WebSocket('ws://localhost:80/clicker'),
       message: '',
       answer: {
         count: 0
@@ -97,9 +95,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.main{
-  display: block;
-}
+
 
 .game{
   height: calc(100vh - 15vh - min(10vh, 80px));
