@@ -9,6 +9,7 @@
   margin: 0;
   overflow: hidden;
   background: #becdbb;
+  user-select: none;
 }
 
 /**
