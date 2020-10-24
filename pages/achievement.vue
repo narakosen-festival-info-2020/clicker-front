@@ -1,11 +1,13 @@
 <template>
   <div class="achievement">
-    <Achievement
-      v-for="data in achievements"
-      :id="data.id"
-      :key="data.id"
-      :description="data.description"
-    />
+    <div class="achievement-box-wrap">
+      <Achievement
+        v-for="data in achievements"
+        :id="data.id"
+        :key="data.id"
+        :description="data.description"
+      />
+    </div>
   </div>
 </template>
 
@@ -39,9 +41,13 @@ export default {
 .achievement{
   width: 100%;
   overflow-y: scroll;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-content: flex-start;
+  .achievement-box-wrap{
+    margin: 0 auto;
+    width: min(100%, 1300px);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+  }
 }
 </style>
