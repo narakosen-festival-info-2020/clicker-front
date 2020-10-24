@@ -2,7 +2,7 @@
   <div
     v-tooltip="!unlocked?'???':name + '<br>' + description"
     :class="unlocked?'unlocked':'locked'"
-    class="achievementBox"
+    class="achievement-box"
   >
     <p> {{ id }} </p>
   </div>
@@ -31,22 +31,20 @@ export default {
 </script>
 
 <style lang="scss">
-.achievementBox{
+.achievement-box{
   text-align: center;
-  display: inline-block;
   box-sizing: border-box;
   width: 60px;
   height: 60px;
   margin: 1px;
   word-wrap: normal;
-  border: #2d2219 solid 1px;
-  // background: #544330;
-}
-.locked{
-  opacity: 0.2
-}
-.unlocked{
-  opacity: 1.0
+  border: 1px solid #2d2219;
+  &.locked{
+    opacity: 0.2
+  }
+  &.unlocked{
+    opacity: 1.0
+  }
 }
 
 // referred URL:https://github.com/Akryum/v-tooltip?ref=kabanoki.net#sass--less
@@ -132,10 +130,10 @@ export default {
   }
 
   &.popover {
-    $color: #f9f9f9;
+    $popoverColor: #f9f9f9;
 
     .popover-inner {
-      background: $color;
+      background: $popoverColor;
       color: black;
       padding: 24px;
       border-radius: 5px;
@@ -143,7 +141,7 @@ export default {
     }
 
     .popover-arrow {
-      border-color: $color;
+      border-color: $popoverColor;
     }
   }
 
@@ -159,4 +157,5 @@ export default {
     transition: opacity .15s;
   }
 }
+
 </style>

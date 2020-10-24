@@ -12,10 +12,12 @@
         class="menu-item"
       >
         <nuxt-link
-          class="menu-text"
+          class="menu-link"
           :to="menu.url"
         >
-          {{ menu.name }}
+          <div class="menu-text">
+            {{ menu.name }}
+          </div>
         </nuxt-link>
       </div>
     </div>
@@ -54,24 +56,23 @@ export default {
     }
   },
   created () {
-    const self = this
-    self.socket.onmessage = (e) => {
-      self.count = JSON.parse(e.data).count
+    this.socket.onmessage = (e) => {
+      this.count = JSON.parse(e.data).count
     }
-    self.socket.onopen = () => {
-      self.connectionError = false
-      self.socket.send(JSON.stringify({
+    this.socket.onopen = () => {
+      this.connectionError = false
+      this.socket.send(JSON.stringify({
         count: 0
       }))
-      self.gameAnimation()
+      this.gameAnimation()
     }
-    self.socket.onerror = () => {
-      self.displayCount = 'Connection Error'
-      self.connectionError = true
+    this.socket.onerror = () => {
+      this.displayCount = 'Connection Error'
+      this.connectionError = true
     }
-    self.socket.onclose = () => {
-      self.displayCount = 'Connection Had Closed'
-      self.connectionError = true
+    this.socket.onclose = () => {
+      this.displayCount = 'Connection Had Closed'
+      this.connectionError = true
     }
   },
   methods: {
@@ -105,16 +106,24 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-.main{
-  display: block;
-}
-
+// header
 .header{
+  h1, h2{
+    margin: 8px 0;
+  }
   overflow: hidden;
   height: 15vh;
   text-align: center;
 }
 
+// game
+.game{
+  height: calc(100vh - 15vh - min(10vh, 80px));
+  overflow: hidden;
+  width: 100%;
+}
+
+// menu
 $menu-border:1px solid black;
 
 .menu-bar{
@@ -134,62 +143,44 @@ $menu-border:1px solid black;
   @include sp {
     font-size: 18px;
   }
-}
 
-.menu-item{
-  display: inline-block;
-  width: 25%;
-  max-width: 200px;
-  height: 100%;
-  position: relative;
-  border-left: $menu-border;
-  &:last-child{
-    border-right: $menu-border;
+  .menu-item{
+    display: inline-block;
+    width: min(25% , 200px);
+    height: 100%;
+    position: relative;
+    box-sizing: border-box;
+    border-left: $menu-border;
+    &:last-child{
+      border-right: $menu-border;
+    }
+
+    .menu-link{
+      display: block;
+      width: 100%;
+      height: 100%;
+      .menu-text{
+        @include center;
+      }
+      &:link{
+        color: black;
+      }
+      &:visited{
+        color: black;
+      }
+      &:hover{
+        color: black;
+      }
+      &:active{
+        color: black;
+      }
+    }
+
+    &:hover{
+      cursor: pointer;
+      background: #c0c0c0;
+    }
+
   }
-
-  & .menu-text{
-    @include center;
-  }
-
-  &.menu-pic{
-    background: #6b6b6b;
-  }
-
-  &:hover{
-    cursor: pointer;
-    background: #c0c0c0;
-  }
-
-}
-
-.body-class {
-  margin: 0;
-  overflow: hidden;
-  background: #becdbb;
-  user-select: none;
-}
-
-/**
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-}
-
-body{
-  overflow: hidden;
-}
-*/
-#app {
-  min-height: 100vh;
-  position: relative;
-}
-
-.game{
-  height: calc(100vh - 15vh - min(10vh, 80px));
-  margin: 0 auto; //TODO:横のセンタリングでバグらせない方法
-  width: 100%;
-  max-width: 840px;
 }
 </style>

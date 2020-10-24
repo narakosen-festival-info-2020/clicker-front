@@ -1,8 +1,6 @@
 <template>
   <div class="click">
-    <div class="centering">
-      <img class="big-click" src="@/assets/bigClick.png" alt="bigClick" @click="click">
-    </div>
+    <img class="big-click" src="@/assets/bigClick.png" alt="bigClick" @click="click">
   </div>
 </template>
 
@@ -16,16 +14,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
-.centering{
-  position: relative;
-  top: 40%;
-  left: 50%;
-  height: 1px;
-  width: 1px;
-  cursor: pointer;
-  text-align: center;
-}
+<style lang="scss" scoped>
 .big-click{
   @include center;
   height: 288px;

@@ -1,5 +1,5 @@
 <template>
-  <div class="facilityDisplay" @click="buy">
+  <div class="facility-display" @click="buy">
     <div class="name">
       <span class="b-text">{{ name }}</span>
     </div>
@@ -57,7 +57,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.facilityDisplay{
+.facility-display{
   cursor: pointer;
   overflow: hidden;
   margin: 12px auto;
@@ -67,32 +67,32 @@ export default {
   display: grid;
   grid-template-rows: 50% 50%;
   grid-template-columns: 80% 1fr;
-  & .name {
+  .name {
     position: relative;
     border: 1px solid black;
     grid-row: 1 / 2;
     grid-column: 1 / 2;
   }
-  & .description {
+  .description {
     position: relative;
     border: 1px solid black;
     grid-row: 2 / 3;
     grid-column: 1 / 2;
   }
-  & .amount {
+  .amount {
     position: relative;
     border: 1px solid black;
     grid-row: 1 / 3;
     grid-column: 2 / 3;
   }
 
-  & .b-text{
+  .b-text{
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
   }
 
-  & .b-text-center{
+  .b-text-center{
     @include center;
   }
 
