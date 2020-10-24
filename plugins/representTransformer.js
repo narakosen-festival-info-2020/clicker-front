@@ -7,7 +7,7 @@ Vue.mixin({
         return 0
       }
       if (data <= 1e9) {
-        return Math.round(data)
+        return Math.round(data).toLocaleString()
       } else {
         return data.toExponential(3)
       }

@@ -4,7 +4,7 @@
       <span class="b-text">{{ name }}</span>
     </div>
     <div class="description">
-      <span class="b-text">価格 : {{ representTransform(amount) }} , 生産量：{{ num_gen }}</span>
+      <span class="b-text">価格 : {{ representTransform(amount) }} 生産量：{{ num_gen }}</span>
     </div>
     <div class="amount">
       <span class="b-text-center">{{ num_hold }}台</span>
@@ -59,18 +59,18 @@ export default {
 <style lang="scss" scoped>
 .facility-display{
   cursor: pointer;
-  overflow: hidden;
   margin: 12px auto;
   background: #ddddce;
   width: 70%;
-  @include sp{
-    width: 80%;
-  }
   height: 100px;
   border: 1px solid black;
   display: grid;
   grid-template-rows: 50% 50%;
   grid-template-columns: 80% 1fr;
+  @include sp{
+    width: 90%;
+    grid-template-columns: 75% 1fr;
+  }
   .name {
     position: relative;
     border: 1px solid black;
@@ -99,6 +99,8 @@ export default {
 
   .b-text-center{
     @include center;
+    text-align: center;
+    width: 100%;
   }
 
 }
