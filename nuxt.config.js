@@ -53,7 +53,7 @@ export default {
   proxy: {
     '/api': {
       // target: 'http://localhost:80',
-      target: 'http://clicker-back-lb-465582205.ap-northeast-1.elb.amazonaws.com/',
+      target: 'https://clicker-back.nitncfes.net',
       pathRewrite: {
         '^/api': '/'
       }

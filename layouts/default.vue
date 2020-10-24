@@ -28,7 +28,7 @@
 export default {
   data () {
     return {
-      socket: new WebSocket('ws://clicker-back-lb-465582205.ap-northeast-1.elb.amazonaws.com:80/clicker'),
+      socket: new WebSocket('wss://clicker-back.nitncfes.net/clicker'),
       // socket: new WebSocket('ws://localhost:80/clicker'),
       gameMenus: [
         {
