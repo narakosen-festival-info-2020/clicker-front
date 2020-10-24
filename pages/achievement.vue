@@ -37,9 +37,11 @@ export default {
 
 <style lang="scss" scoped>
 .achievement{
-  text-align: left;
   width: 100%;
-  max-width: 840px;
   overflow-y: scroll;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
 }
 </style>

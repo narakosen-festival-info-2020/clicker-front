@@ -29,3 +29,11 @@ $sp: 480px;  // スマホ
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
 }
+
+.body-class {
+  margin: 0;
+  overflow: hidden;
+  background: #becdbb;
+  user-select: none;
+  display: block;
+}
