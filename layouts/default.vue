@@ -132,6 +132,14 @@ export default {
   h1, h2{
     margin: 8px 0;
   }
+  @include sp-ip5 {
+    h1{
+      font-size: 1.8rem;
+    }
+    h2{
+      font-size: 1.3rem;
+    }
+  }
   overflow: hidden;
   height: 15vh;
   text-align: center;

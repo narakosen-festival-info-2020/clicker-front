@@ -28,8 +28,8 @@ export default {
 <style lang="scss" scoped>
 .big-click{
   @include center;
-  height: 288px;
-  width: 288px;
+  height: min(70vmin, 288px);
+  width: min(70vmin, 288px);
 }
 
 .big-click-fire{
