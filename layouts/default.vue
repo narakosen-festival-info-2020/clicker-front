@@ -55,6 +55,27 @@ export default {
       clickCountBuffer: 0
     }
   },
+  mounted () {
+    if (process.browser) {
+      const touch = 'ontouchstart' in document.documentElement ||
+                  navigator.maxTouchPoints > 0 ||
+                  navigator.msMaxTouchPoints > 0
+      if (touch) {
+        try {
+          for (const si in document.styleSheets) {
+            const styleSheet = document.styleSheets[si]
+            if (!styleSheet.rules) { continue }
+            for (let ri = styleSheet.rules.length - 1; ri >= 0; ri--) {
+              if (!styleSheet.rules[ri].selectorText) { continue }
+              if (styleSheet.rules[ri].selectorText.match(':hover')) {
+                styleSheet.deleteRule(ri)
+              }
+            }
+          }
+        } catch (ex) {}
+      }
+    }
+  },
   created () {
     this.socket.onmessage = (e) => {
       this.count = JSON.parse(e.data).count
@@ -134,14 +155,14 @@ $menu-border:1px solid black;
   bottom: 0;
   background: #999999;
   text-align: center;
-  font-size: 14px;
+  font-size: 18px;
 
   @include tab {
     font-size: 16px;
   }
 
   @include sp {
-    font-size: 18px;
+    font-size: 14px;
   }
 
   .menu-item{
@@ -149,18 +170,15 @@ $menu-border:1px solid black;
     width: min(25% , 200px);
     height: 100%;
     position: relative;
-    box-sizing: border-box;
-    border-left: $menu-border;
-    &:last-child{
-      border-right: $menu-border;
-    }
-
+    overflow: hidden;
     .menu-link{
       display: block;
       width: 100%;
       height: 100%;
       .menu-text{
         @include center;
+        width: 100%;
+        transition: all .2s ease-out;
       }
       &:link{
         color: black;
@@ -178,9 +196,11 @@ $menu-border:1px solid black;
 
     &:hover{
       cursor: pointer;
-      background: #c0c0c0;
+      background: #686868;
+      .menu-text{
+        transform: translate(-50%,-50%) rotate(30deg);
+      }
     }
-
   }
 }
 </style>
