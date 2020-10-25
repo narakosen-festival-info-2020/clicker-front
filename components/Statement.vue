@@ -34,9 +34,39 @@ export default {
 
 <style scoped lang="scss">
 .section{
+  margin: 0 auto;
+  width: calc(min(100%, 600px) - 16px);
   text-align: center;
-  h1, h2 {
+  padding: 0 8px;
+  h1{
+    display: flex;
+    align-items: center;
+    &::before, &::after {
+      content: "";
+      height: 2px;
+      flex-grow: 1;
+      background-color: black;
+    }
+
+    &::before {
+      margin-right: 1rem;
+    }
+
+    &::after {
+      margin-left: 1rem;
+    }
+  }
+  h2 {
     text-align: left;
+  }
+
+  @include sp {
+    h1{
+      font-size: 1.5rem;
+    }
+    h2{
+      font-size: 1.2rem;
+    }
   }
 }
 </style>

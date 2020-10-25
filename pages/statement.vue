@@ -1,9 +1,7 @@
 <template>
   <div class="statement">
-    <div class="section">
-      <Statement :statements="statements.general" :title="'全体'" class="subsection" />
-      <Statement :statements="statements.click" :title="'クリック関連'" class="subsection" />
-    </div>
+    <Statement :statements="statements.general" :title="'全体'" />
+    <Statement :statements="statements.click" :title="'クリック関連'" />
   </div>
 </template>
 
@@ -13,6 +11,7 @@ export default {
   components: { Statement },
   data () {
     return {
+      errorLog: '',
       statements: {
         general: [
           // order は配列の順番を指定する
@@ -68,12 +67,12 @@ export default {
         responseType: 'json'
       })
         .then((response) => {
-          this.statement = response
+          this.statements = response
         })
         .catch((error) => {
           // エラー表示を無理やり
           // TODO何かしらで書き換える
-          this.statement.general[0].value = error
+          this.errorLog = error
         })
     }
   }
