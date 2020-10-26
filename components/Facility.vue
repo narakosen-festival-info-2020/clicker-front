@@ -4,7 +4,10 @@
       <span class="b-text">{{ name }}</span>
     </div>
     <div class="description">
-      <span class="b-text">価格 : {{ representTransform(amount) }} 生産量：{{ num_gen }}</span>
+      <span class="b-text">
+        <span class="text">価格 : {{ representTransform(amount) }}</span>
+        <span class="text">生産量：{{ num_gen }}</span>
+      </span>
     </div>
     <div class="amount">
       <span class="b-text-center">{{ num_hold }}台</span>
@@ -63,7 +66,7 @@ export default {
   background: #ddddce;
   width: 70%;
   height: 100px;
-  border: 1px solid black;
+  border: 5px ridge rgb(85, 24, 0);
   display: grid;
   grid-template-rows: 50% 50%;
   grid-template-columns: 80% 1fr;
@@ -72,6 +75,7 @@ export default {
     grid-template-columns: 75% 1fr;
   }
   .name {
+    font-weight: 900;
     position: relative;
     border: 1px solid black;
     grid-row: 1 / 2;
@@ -82,6 +86,9 @@ export default {
     border: 1px solid black;
     grid-row: 2 / 3;
     grid-column: 1 / 2;
+    & .text{
+      display: inline-block;
+    }
   }
   .amount {
     position: relative;
