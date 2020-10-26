@@ -16,9 +16,7 @@ export default {
       this.bcf = false
       requestAnimationFrame(() => {
         this.bcf = true
-        console.log(this.bcf)
       })
-      console.log(this.bcf)
       this.$store.dispatch('clicker/increment', 1)
     }
   }
