@@ -64,7 +64,7 @@ export default {
   },
   methods: {
     async loadStatement () {
-      await this.$axios.$get('/api/statement', {
+      await this.$axios.$get('/statements', {
         responseType: 'json'
       })
         .then((response) => {

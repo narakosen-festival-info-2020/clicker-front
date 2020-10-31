@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     async loadFacilities () {
-      await this.$axios.$get('/api/facility', {
+      await this.$axios.$get('facility', {
         responseType: 'json'
       })
         .then((response) => {

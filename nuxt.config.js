@@ -48,16 +48,7 @@ export default {
   ],
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
-    proxy: true
-  },
-  proxy: {
-    '/api': {
-      // target: 'http://localhost:80',
-      target: 'https://clicker-back.nitncfes.net',
-      pathRewrite: {
-        '^/api': '/'
-      }
-    }
+    baseURL: 'https://clicker-back.nitncfes.net'
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)

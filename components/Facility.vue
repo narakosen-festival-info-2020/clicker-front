@@ -32,14 +32,14 @@ export default {
   },
   methods: {
     async buy () {
-      this.ip = await this.$axios.$post(`/api/facility/${this.name}`)
+      this.ip = await this.$axios.$post(`facility/${this.name}`)
         .catch((error) => {
           alert(`購入できませんでした${error}`)
         })
       await this.loadFacility()
     },
     async loadFacility () {
-      await this.$axios.$get(`/api/facility/${this.name}`, {
+      await this.$axios.$get(`facility/${this.name}`, {
         responseType: 'json'
       })
         .then((response) => {
