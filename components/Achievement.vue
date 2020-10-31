@@ -39,6 +39,7 @@ export default {
   margin: 1px;
   word-wrap: normal;
   border: 1px solid #2d2219;
+  background: rgb(209, 209, 209);
   &.locked{
     opacity: 0.2
   }
@@ -51,6 +52,7 @@ export default {
 .tooltip {
   display: block !important;
   z-index: 10000;
+  max-width: 95%;
 
   .tooltip-inner {
     background: #35495e;
