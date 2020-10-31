@@ -8,7 +8,7 @@
         {{ statement.subtitle }}
       </h2>
       <p class="statement-number">
-        {{ statement.value }}
+        {{ representTransform(statement.value) }}
       </p>
     </div>
   </div>
