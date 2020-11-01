@@ -48,8 +48,8 @@ export default {
   ],
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
-    // baseURL: 'https://clicker-back.nitncfes.net'
-    baseURL: 'http://localhost'
+    baseURL: 'https://clicker-back.nitncfes.net'
+    // baseURL: 'http://localhost'
   },
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
