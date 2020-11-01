@@ -4,7 +4,9 @@
       <Achievement
         v-for="data in achievements"
         :id="data.id"
-        :key="data.id"
+        :key="data.name"
+        :unlocked="data.unlocked"
+        :name="data.name"
         :description="data.description"
       />
     </div>
@@ -20,18 +22,27 @@ export default {
   },
   data () {
     return {
+      errorLog: '',
       achievements: []
     }
   },
   created () {
-    for (let i = 0; i < 500; i++) {
-      this.achievements.push({
-        id: i,
-        // ダミー説明文
-        description: `実績${i}は実績による実績のための実績です。実績である。実績である。実績である。実績である。実績である。実績である。実績である。実績である。実績。`,
-        // unlocked: false
-        unlocked: i % 5 === 0
+    this.loadAchievements()
+  },
+  methods: {
+    async loadAchievements () {
+      await this.$axios.$get('achievements', {
+        responseType: 'json'
       })
+        .then((response) => {
+          this.achievements = response.achievements
+          this.achievements.map((e) => {
+            e.description = '実績ですよ！１！実実実実実実実績実実績実績実績実実績実実実績績績績績績績績績績績実績'
+          })
+        })
+        .catch((error) => {
+          this.errorLog = error
+        })
     }
   }
 }

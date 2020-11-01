@@ -6,7 +6,7 @@
     <div class="description">
       <span class="b-text">
         <span class="text">価格 : {{ representTransform(amount) }}</span>
-        <span class="text">生産量：{{ num_gen }}</span>
+        <span class="text">生産量：{{ representTransform(num_gen, 1) }}</span>
       </span>
     </div>
     <div class="amount">
@@ -25,6 +25,7 @@ export default {
   },
   data () {
     return {
+      errorLog: '',
       amount: 0,
       num_gen: 0,
       num_hold: 0
@@ -37,7 +38,7 @@ export default {
     async buy () {
       this.ip = await this.$axios.$post(`facility/${this.name}`)
         .catch((error) => {
-          alert(`購入できませんでした${error}`)
+          this.errorLog = error
         })
       await this.loadFacility()
     },
@@ -51,8 +52,7 @@ export default {
           this.num_gen = response.num_gen
         })
         .catch((error) => {
-          alert('サーバーエラー')
-          alert(error)
+          this.errorLog = error
         })
     }
   }

@@ -15,16 +15,21 @@ export default {
       type: Number,
       default: 0
     },
-    description: {
+    name: {
       type: String,
       default: '実績'
+    },
+    description: {
+      type: String,
+      default: '実績の説明です。'
+    },
+    unlocked: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
     return {
-      name: `実績${this.id}`,
-      // unlocked: false
-      unlocked: this.id % 5 === 0
     }
   }
 }

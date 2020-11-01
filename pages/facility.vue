@@ -17,6 +17,7 @@ export default {
   },
   data () {
     return {
+      errorLog: '',
       facilities: []
     }
   },
@@ -29,12 +30,11 @@ export default {
         responseType: 'json'
       })
         .then((response) => {
-          this.facilities = [...response.facilities]
+          this.facilities = response.facilities
           this.facilities.sort((a, b) => a.num_gen - b.num_gen)
         })
         .catch((error) => {
-          alert('サーバーエラー')
-          alert(error)
+          this.errorLog = error
         })
     }
   }

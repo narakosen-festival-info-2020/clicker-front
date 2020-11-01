@@ -13,6 +13,7 @@ export default {
   components: { Statement },
   data () {
     return {
+      errorLog: '',
       statements: {
         general: [],
         click: []
@@ -34,7 +35,7 @@ export default {
   },
   methods: {
     async loadStatement () {
-      await this.$axios.$get('/statements', {
+      await this.$axios.$get('statements', {
         responseType: 'json'
       })
         .then((response) => {
@@ -47,9 +48,7 @@ export default {
           })
         })
         .catch((error) => {
-          // エラー表示を無理やり
-          // TODO何かしらで書き換える
-          this.statement.general[0].value = error
+          this.errorLog = error
         })
     }
   }
