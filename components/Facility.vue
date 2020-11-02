@@ -1,7 +1,7 @@
 <template>
   <div class="facility-display" @click="buy">
     <div class="name">
-      <span class="b-text">{{ name }}</span>
+      <span class="b-text">{{ title }}</span>
     </div>
     <div class="description">
       <span class="b-text">
@@ -10,7 +10,7 @@
       </span>
     </div>
     <div class="amount">
-      <span class="b-text-center">{{ num_hold }}台</span>
+      <span class="b-text-center">{{ num_hold }}{{ suffix }}</span>
     </div>
   </div>
 </template>
@@ -21,6 +21,18 @@ export default {
     name: {
       type: String,
       default: 'temp'
+    },
+    title: {
+      type: String,
+      default: 'temp'
+    },
+    description: {
+      type: String,
+      default: 'description'
+    },
+    suffix: {
+      type: String,
+      default: '台'
     }
   },
   data () {
