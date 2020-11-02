@@ -141,13 +141,13 @@ export default {
     }
   }
   overflow: hidden;
-  height: 15vh;
+  height: 15%;
   text-align: center;
 }
 
 // game
 .game{
-  height: calc(100vh - 15vh - min(10vh, 80px));
+  height: calc(100% - 15% - min(10%, 80px));
   overflow: hidden;
   width: 100%;
 }
@@ -157,7 +157,7 @@ $menu-border:1px solid black;
 
 .menu-bar{
   display: block;
-  height: min(10vh, 80px);
+  height: min(10%, 80px);
   width: 100%;
   position: absolute;
   bottom: 0;
