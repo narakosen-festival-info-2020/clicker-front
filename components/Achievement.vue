@@ -1,6 +1,6 @@
 <template>
   <div
-    v-tooltip="!unlocked?'???':name + '<br>' + description"
+    v-tooltip="!unlocked?'[未解除]???':`[解除]${name}`"
     :class="unlocked?'unlocked':'locked'"
     class="achievement-box"
   >
