@@ -17,6 +17,7 @@ export default {
   },
   data () {
     return {
+      errorLog: '',
       facilities: []
     }
   },
@@ -25,16 +26,15 @@ export default {
   },
   methods: {
     async loadFacilities () {
-      await this.$axios.$get('/api/facility', {
+      await this.$axios.$get('facility', {
         responseType: 'json'
       })
         .then((response) => {
-          this.facilities = [...response.facilities]
+          this.facilities = response.facilities
           this.facilities.sort((a, b) => a.num_gen - b.num_gen)
         })
         .catch((error) => {
-          alert('サーバーエラー')
-          alert(error)
+          this.errorLog = error
         })
     }
   }
@@ -42,7 +42,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.building{
+.facility{
   overflow-y: auto;
 }
 </style>

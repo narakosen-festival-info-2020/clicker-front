@@ -13,49 +13,20 @@ export default {
   components: { Statement },
   data () {
     return {
+      errorLog: '',
       statements: {
-        general: [
-          // order は配列の順番を指定する
-          // バックエンドで配列の順番を決められるなら order は消す
-          {
-            order: 0,
-            name: 'totalCount',
-            subtitle: 'これまでの鹿せんべい生産量',
-            value: 0
-          },
-          {
-            order: 10,
-            name: 'nowCount',
-            subtitle: '現在の鹿せんべい所持数  ',
-            value: 0
-          },
-          {
-            order: 20,
-            name: 'totalUsers',
-            subtitle: 'これまでの来訪者数',
-            value: 0
-          },
-          {
-            order: 30,
-            name: 'nowUsers',
-            subtitle: '現在の来訪者数',
-            value: 0
-          }
-        ],
-        click: [
-          {
-            order: 0,
-            name: 'totalClick',
-            subtitle: 'これまでのクリック数',
-            value: 0
-          },
-          {
-            order: 10,
-            name: 'totalClickGen',
-            subtitle: 'これまでのクリックによる生産数',
-            value: 0
-          }
-        ]
+        general: [],
+        click: []
+      },
+      nameToSubtitle: {
+        total_count: 'これまでの鹿せんべい生産量',
+        now_count: '現在の鹿せんべい所持数  ',
+        now_sps: 'げんざいの秒間生産量',
+        total_users: 'これまでの来訪者数',
+        now_users: '現在の来訪者数',
+        total_click: 'これまでのクリック数',
+        total_click_gen: 'これまでのクリックによる生産数',
+        now_spc: '現在の1クリックあたりの生産数'
       }
     }
   },
@@ -64,16 +35,20 @@ export default {
   },
   methods: {
     async loadStatement () {
-      await this.$axios.$get('/api/statement', {
+      await this.$axios.$get('statements', {
         responseType: 'json'
       })
         .then((response) => {
-          this.statement = response
+          this.statements = response.statements
+          this.statements.general.map((e) => {
+            e.subtitle = this.nameToSubtitle[e.name]
+          })
+          this.statements.click.map((e) => {
+            e.subtitle = this.nameToSubtitle[e.name]
+          })
         })
         .catch((error) => {
-          // エラー表示を無理やり
-          // TODO何かしらで書き換える
-          this.statement.general[0].value = error
+          this.errorLog = error
         })
     }
   }

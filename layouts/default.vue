@@ -55,6 +55,27 @@ export default {
       clickCountBuffer: 0
     }
   },
+  mounted () {
+    if (process.browser) {
+      const touch = 'ontouchstart' in document.documentElement ||
+                  navigator.maxTouchPoints > 0 ||
+                  navigator.msMaxTouchPoints > 0
+      if (touch) {
+        try {
+          for (const si in document.styleSheets) {
+            const styleSheet = document.styleSheets[si]
+            if (!styleSheet.rules) { continue }
+            for (let ri = styleSheet.rules.length - 1; ri >= 0; ri--) {
+              if (!styleSheet.rules[ri].selectorText) { continue }
+              if (styleSheet.rules[ri].selectorText.match(':hover')) {
+                styleSheet.deleteRule(ri)
+              }
+            }
+          }
+        } catch (ex) {}
+      }
+    }
+  },
   created () {
     this.socket.onmessage = (e) => {
       this.count = JSON.parse(e.data).count
@@ -111,14 +132,22 @@ export default {
   h1, h2{
     margin: 8px 0;
   }
+  @include sp-ip5 {
+    h1{
+      font-size: 1.8rem;
+    }
+    h2{
+      font-size: 1.3rem;
+    }
+  }
   overflow: hidden;
-  height: 15vh;
+  height: 15%;
   text-align: center;
 }
 
 // game
 .game{
-  height: calc(100vh - 15vh - min(10vh, 80px));
+  height: calc(100% - 15% - min(10%, 80px));
   overflow: hidden;
   width: 100%;
 }
@@ -128,20 +157,20 @@ $menu-border:1px solid black;
 
 .menu-bar{
   display: block;
-  height: min(10vh, 80px);
+  height: min(10%, 80px);
   width: 100%;
   position: absolute;
   bottom: 0;
   background: #999999;
   text-align: center;
-  font-size: 14px;
+  font-size: 18px;
 
   @include tab {
     font-size: 16px;
   }
 
   @include sp {
-    font-size: 18px;
+    font-size: 14px;
   }
 
   .menu-item{
@@ -149,18 +178,15 @@ $menu-border:1px solid black;
     width: min(25% , 200px);
     height: 100%;
     position: relative;
-    box-sizing: border-box;
-    border-left: $menu-border;
-    &:last-child{
-      border-right: $menu-border;
-    }
-
+    overflow: hidden;
     .menu-link{
       display: block;
       width: 100%;
       height: 100%;
       .menu-text{
         @include center;
+        width: 100%;
+        transition: all .2s ease-out;
       }
       &:link{
         color: black;
@@ -178,9 +204,11 @@ $menu-border:1px solid black;
 
     &:hover{
       cursor: pointer;
-      background: #c0c0c0;
+      background: #686868;
+      .menu-text{
+        transform: translate(-50%,-50%) rotate(30deg);
+      }
     }
-
   }
 }
 </style>
