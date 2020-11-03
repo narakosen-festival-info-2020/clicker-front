@@ -75,6 +75,9 @@ export default {
         } catch (ex) {}
       }
     }
+    setInterval(() => {
+      this.loadSpC()
+    }, 1000)
   },
   created () {
     this.socket.onmessage = (e) => {
@@ -121,6 +124,18 @@ export default {
     updateClickCount () {
       this.clickCountBuffer = this.$store.getters['clicker/count']
       this.$store.dispatch('clicker/reset')
+    },
+    async loadSpC () {
+      await this.$axios.$get('statements', {
+        responseType: 'json'
+      })
+        .then((response) => {
+          // FIXME:ハードコーディングポイント マジックナンバー2
+          this.$store.dispatch('clicker/setSpC', this.representTransform(response.statements.click[2].value, 1))
+        })
+        .catch((error) => {
+          this.errorLog = error
+        })
     }
   }
 }
