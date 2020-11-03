@@ -1,9 +1,13 @@
 body {
   margin: 0;
-  overflow: hidden;
   background: #becdbb;
   user-select: none;
   display: block;
+}
+
+#__layout, #__layout>div, #__nuxt, body, html {
+  overflow: hidden;
+  height: 100%;
 }
 
 @keyframes anime {
