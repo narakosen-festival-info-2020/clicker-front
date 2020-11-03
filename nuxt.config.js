@@ -1,10 +1,13 @@
 export default {
+  server: {
+    host: '0.0.0.0'
+  },
   // Disable server-side rendering (https://go.nuxtjs.dev/ssr-mode)
   ssr: false,
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    title: 'clicker-front',
+    title: '鹿せんべいクリッカー',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -12,17 +15,13 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ],
-    bodyAttrs: {
-      class: 'body-class'
-    }
+    ]
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
-  css: [
-  ],
+  css: ['~/assets/css/global'],
   styleResources: {
-    scss: ['~/assets/css/global.scss']
+    scss: ['~/assets/css/vars.scss']
   },
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
