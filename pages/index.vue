@@ -1,6 +1,6 @@
 <template>
   <div class="click">
-    <img :class="['big-click', {'big-click-fire' : bcf}]" src="@/assets/bigClick.png" alt="bigClick" @click="click">
+    <img :class="['big-click', {'big-click-fire' : bcf}, {'big-click-stay': !bcf}]" src="@/assets/bigClick.png" alt="bigClick" @click="click">
   </div>
 </template>
 
@@ -13,9 +13,8 @@ export default {
   },
   methods: {
     click () {
-      this.bcf = false
       requestAnimationFrame(() => {
-        this.bcf = true
+        this.bcf = !this.bcf
       })
       this.$store.dispatch('clicker/increment', 1)
     }
@@ -32,5 +31,9 @@ export default {
 
 .big-click-fire{
   animation: anime 1s linear;
+}
+
+.big-click-stay{
+  animation: anime_stay 1s linear;
 }
 </style>
